@@ -1,0 +1,21 @@
+{
+  "name": "estacionamento",
+  "version": "1.0.0",
+  "description": "api de controlo de espaco de estacionamentos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+	  "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "projeto"
+  },
+  "author": "Frederico Cabral e Leandro Gomes",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7",
+    "swagger-ui-express": "^4.1.6"
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Calculator",
+    "description": "Arithemtics over HTTP!",
+    "version": "1.0"
+  },
+  "host": "localhost:8081",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/soma/{a}&{b}": {
+      "get": {
+        "description": "Responds with a sum of two numbers.",
+        "operationId": "Add two integers",
+        "parameters": [
+          {
+            "name": "a",
+            "in": "path",
+            "description": "First operand. Default value is <code>51</code>.",
+            "required": true,
+            "default": "1"
+          },
+          {
+            "name": "b",
+            "in": "path",
+            "description": "Second operand. Default value is <code>49</code>.",
+            "required": true,
+            "default": "49",
+            "enum": [
+              "49",
+			  "50"
+            ]
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/sub/{a}&{b}": {
+      "get": {
+        "description": "Responds with a difference between two numbers.",
+        "operationId": "Subtract two integers",
+        "parameters": [
+          {
+            "name": "a",
+            "in": "path",
+            "description": "First operand. Default value is <code>100</code>.",
+            "required": true,
+            "default": "100"
+          },
+          {
+            "name": "b",
+            "in": "path",
+            "description": "Second operand. Default value is <code>50</code>.",
+            "required": true,
+            "default": "50",
+            "enum": [
+              "50"
+            ]
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/div/{a}&{b}": {
+      "get": {
+        "description": "Responds with a quotient of two numbers.",
+        "operationId": "Divide two integers",
+        "parameters": [
+          {
+            "name": "a",
+            "in": "path",
+            "description": "First operand. Default value is <code>100</code>.",
+            "required": true,
+            "default": "100",
+            "enum": [
+              "100"
+            ]
+          },
+          {
+            "name": "b",
+            "in": "path",
+            "description": "Second operand. Default value is <code>20</code>.",
+            "required": true,
+            "default": "20",
+            "enum": [
+              "20"
+            ]
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/mul/{a}&{b}": {
+      "get": {
+        "description": "Responds with a product of two numbers.",
+        "operationId": "Multiply two integers",
+        "parameters": [
+          {
+            "name": "a",
+            "in": "path",
+            "description": "First operand. Default value is <code>20</code>.",
+            "required": true,
+            "default": "20"
+          },
+          {
+            "name": "b",
+            "in": "path",
+            "description": "Second operand. Default value is <code>5</code>.",
+            "required": true,
+            "default": "5"
+          }
+        ],
+        "responses": {}
+      }
+    }
+  }
+}
