@@ -1,27 +1,19 @@
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
-/*router.get("/soma/:a&:b", (req, res) => {
-    const c = parseInt(req.params.a) + parseInt(req.params.b);
-    res.send(c.toString());
-})
+//invocar o controller
+const calculadora_controller = require('../controllers/estacionamentosController');
 
-router.get("/sub/:a&:b", (req, res) => {
-    const c = parseInt(req.params.a) - parseInt(req.params.b);
-	console.log(req.params.a , req.params.b , c)
-    res.send(c.toString());
-})
+//route soma
+router.route("/soma/:a&:b").get(calculadora_controller.soma);
 
-router.get("/div/:a&:b", (req, res) => {
-    const c = parseInt(req.params.a) / parseInt(req.params.b);
-	console.log(req.params.a , req.params.b , c)
-    res.send(c.toString());
-})
+//route subtracao
+router.route("/subtracao/:a&:b").get(calculadora_controller.subtracao);
 
-router.get("/mul/:a&:b", (req, res) => {
-    const c = parseInt(req.params.a) * parseInt(req.params.b);
-	console.log(req.params.a , req.params.b , c)
-    res.send(c.toString());
-})*/
+//route multiplicacao
+router.route("/multiplicacao/:a&:b").get(calculadora_controller.multiplicacao);
+
+//route divisao
+router.route("/divisao/:a&:b").get(calculadora_controller.divisao);
 
 module.exports = router;
