@@ -16,7 +16,7 @@ exports.divisao = function (req, res) {
     res.send(c.toString());
 }
 
-var Registo = require ('../models/estacionamentosMatriculasModel');
+var Matricula = require ('../models/estacionamentosMatriculasModel');
 exports.AddMatriculas = async function(req, res){
 	
     let quantidade = req.params.n
@@ -34,7 +34,7 @@ exports.AddMatriculas = async function(req, res){
         (procura matricula a inserir se existir voltar a gerar)*/
 
         //formata a matricula para ser inserida
-        let registo = new  Registo({
+        let registo = new  Matricula({
             _id: i,
             nMatricula: '' + numeroa + numerob + '-' + String.fromCharCode(letraa) +
              String.fromCharCode(letrab) + '-' + numeroc + numerod,
@@ -50,4 +50,13 @@ exports.AddMatriculas = async function(req, res){
     }
 
     res.send('Matriculas registadas sucesso!')
-};
+}
+
+exports.DelMatriculas = function(req, res){
+    Matricula.remove(function(err){
+        if(err){
+            throw err;
+        }
+        res.send('Matriculas Apagadas com sucesso!')
+    })
+}

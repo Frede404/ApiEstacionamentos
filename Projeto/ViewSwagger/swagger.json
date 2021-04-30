@@ -26,6 +26,13 @@
         "responses": {}
       }
     },
+    "/DelMatriculas": {
+      "delete": {
+        "description": "Apagar todas as matriculas",
+        "operationId": "Apagar todas Matriculas na Base de Dados",
+        "responses": {}
+      }
+    },
     "/sub/{a}&{b}": {
       "get": {
         "description": "Responds with a difference between two numbers.",
