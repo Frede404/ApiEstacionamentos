@@ -12,7 +12,7 @@
   ],
   "paths": {
     "/AddMatriculas/{n}": {
-      "get": {
+      "post": {
         "description": "Inserir Matriculas",
         "operationId": "Inserir matriculas na Base de Dados",
         "parameters": [
