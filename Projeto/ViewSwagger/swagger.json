@@ -11,28 +11,16 @@
     "http"
   ],
   "paths": {
-    "/soma/{a}&{b}": {
+    "/AddMatriculas/{n}": {
       "get": {
-        "description": "Responds with a sum of two numbers.",
-        "operationId": "Add two integers",
+        "description": "Inserir Matriculas",
+        "operationId": "Inserir matriculas na Base de Dados",
         "parameters": [
           {
-            "name": "a",
+            "name": "n",
             "in": "path",
-            "description": "First operand. Default value is <code>51</code>.",
+            "description": "Quantas matriculas pretende inserir?",
             "required": true,
-            "default": "1"
-          },
-          {
-            "name": "b",
-            "in": "path",
-            "description": "Second operand. Default value is <code>49</code>.",
-            "required": true,
-            "default": "49",
-            "enum": [
-              "49",
-			  "50"
-            ]
           }
         ],
         "responses": {}
