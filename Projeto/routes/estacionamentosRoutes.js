@@ -2,18 +2,18 @@ const express = require("express");
 const router = express.Router();
 
 //invocar o controller
-const calculadora_controller = require('../controllers/estacionamentosController');
+const estacionamentos_controller = require('../controllers/estacionamentosController');
 
-//route soma
-router.route("/soma/:a&:b").get(calculadora_controller.soma);
+//route regista matriculas
+router.route("/AddMatriculas/:n").post(estacionamentos_controller.AddMatriculas);
 
 //route subtracao
-router.route("/subtracao/:a&:b").get(calculadora_controller.subtracao);
+router.route("/subtracao/:a&:b").get(estacionamentos_controller.subtracao);
 
 //route multiplicacao
-router.route("/multiplicacao/:a&:b").get(calculadora_controller.multiplicacao);
+router.route("/multiplicacao/:a&:b").get(estacionamentos_controller.multiplicacao);
 
 //route divisao
-router.route("/divisao/:a&:b").get(calculadora_controller.divisao);
+router.route("/divisao/:a&:b").get(estacionamentos_controller.divisao);
 
 module.exports = router;

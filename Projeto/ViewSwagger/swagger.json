@@ -13,13 +13,13 @@
   "paths": {
     "/AddMatriculas/{n}": {
       "post": {
-        "description": "Inserir Matriculas",
+        "description": "Quantas matriculas pretende inserir?",
         "operationId": "Inserir matriculas na Base de Dados",
         "parameters": [
           {
             "name": "n",
             "in": "path",
-            "description": "Quantas matriculas pretende inserir?",
+            "description": "Numero de matriculas a inserir",
             "required": true
           }
         ],
