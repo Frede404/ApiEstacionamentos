@@ -2,24 +2,31 @@ const express = require("express");
 const router = express.Router();
 
 //invocar o controller
-const parque_controller = require('../controllers/estacionamentosRegistoEntradasController');
+const parque_controller = require('../controllers/estacionamentosParqueController');
 
 //route media
-router.route("/Media/:periodo").post(parque_controller.MediaCarros);
+router.route("/Media/:periodo").get(parque_controller.MediaCarros);
 
 //route MaisCarros
-router.route("/DiaMaisCarros").post(parque_controller.MaiorDia);
+/*router.route("/DiaMaisCarros").get(parque_controller.MaiorDia);
 
 //route entradas do Carro num dia
-router.route("/EntradasCarro/:matricula&:dia").post(parque_controller.QtdDiaCarro);
+router.route("/EntradasCarro/:matricula&:dia").get(parque_controller.QtdDiaCarro);
 
 //route numero de carros num periudo
-router.route("/CarrosPeriodo/:DataInicio&:DataFim").post(parque_controller.QtdPeriodo);
+router.route("/CarrosPeriodo/:DataInicio&:DataFim").get(parque_controller.QtdPeriodo);
 
 //route Registo de saida de um carro
-router.route("/RegistaSaida").post(parque_controller.RegistaSaida);
+router.route("/RegistaSaida").put(parque_controller.RegistaSaida);
 
 //route Lugares Vagos
-router.route("/LugaresVagos").post(parque_controller.LugaresVagos);
+router.route("/LugaresVagos").get(parque_controller.LugaresVagos);
+*/
+
+//route Reset ao parque
+router.route("/ResetParque/:n").put(parque_controller.ResetParque);
+
+//route Registo de saida de um carro
+router.route("/RegistaEntrada/:matricula").post(parque_controller.RegistaEntrada);
 
 module.exports = router;

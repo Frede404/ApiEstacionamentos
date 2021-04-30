@@ -35,6 +35,23 @@
         "responses": {}
       }
     },
+    "/Parque/ResetParque/{n}": {
+      "put": {
+        "tags": ["Matriculas"],
+        "description": "Reset ao parque",
+        "operationId": "Reset ao parque",
+        "parameters": [
+          {
+            "name": "n",
+            "in": "path",
+            "description": "inserir o numero de lugares vagos",
+            "required": true,
+            "default": "150"
+          }
+        ],
+        "responses": {}
+      }
+    },
 
     "/Parque/LugaresVagos": {
       "get": {
@@ -118,11 +135,27 @@
         "responses": {}
       }
     },
+    "/Parque/RegistaEntrada/{matricula}": {
+      "post": {
+        "tags": ["Parque"],
+        "description": "Regista Entrada de um carro",
+        "operationId": "Regista Entrada de um carro",
+        "parameters": [
+          {
+            "name": "matricula",
+            "in": "path",
+            "description": "Registo de entrada de um carro",
+            "required": true
+          }
+        ],
+        "responses": {}
+      }
+    },
     "/Parque/RegistaSaida": {
       "put": {
         "tags": ["Parque"],
-        "description": "Regista Saida dum carro",
-        "operationId": "Regista Saida dum carro",
+        "description": "Regista Saida de um carro",
+        "operationId": "Regista Saida de um carro",
         "responses": {}
       }
     }

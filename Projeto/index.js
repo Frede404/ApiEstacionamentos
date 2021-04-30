@@ -9,6 +9,7 @@ const swaggerDocument = require('./ViewSwagger/swagger.json');
 const porto = 8081; 
 
 const MatriculasRoutes = require("./routes/estacionamentosMatriculasRoutes");
+const ParqueRoutes = require("./routes/estacionamentosParqueRoutes");
 
 //iniciar app express
 const app = express();
@@ -33,6 +34,7 @@ app.use(
 );
 
 app.use("/Matriculas", MatriculasRoutes);
+app.use("/Parque", ParqueRoutes);
 
 app.use(express.json());
 // Iniciar servidor
