@@ -20,7 +20,7 @@
             "name": "n",
             "in": "path",
             "description": "Quantas matriculas pretende inserir?",
-            "required": true,
+            "required": true
           }
         ],
         "responses": {}
