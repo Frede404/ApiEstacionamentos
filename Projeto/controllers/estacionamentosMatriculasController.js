@@ -16,7 +16,7 @@ exports.divisao = function (req, res) {
     res.send(c.toString());
 }
 
-var Registo = require ('../models/estacionamentosModel');
+var Registo = require ('../models/estacionamentosMatriculasModel');
 exports.AddMatriculas = async function(req, res){
 	
     let quantidade = req.params.n
@@ -30,12 +30,14 @@ exports.AddMatriculas = async function(req, res){
         let letraa = Math.floor(Math.random() * (91 - 65)) + 65;
         let letrab = Math.floor(Math.random() * (91 - 65)) + 65;
         
-        // -------------------- possivel melhoria: nao introduzir matriculas iguais (procura matricula a inserir se existir voltar a gerar)
+        /* -------------------- possivel melhoria: nao introduzir matriculas iguais 
+        (procura matricula a inserir se existir voltar a gerar)*/
 
         //formata a matricula para ser inserida
         let registo = new  Registo({
             _id: i,
-            nMatricula: '' + numeroa + numerob + '-' + String.fromCharCode(letraa) + String.fromCharCode(letrab) + '-' + numeroc + numerod,
+            nMatricula: '' + numeroa + numerob + '-' + String.fromCharCode(letraa) +
+             String.fromCharCode(letrab) + '-' + numeroc + numerod,
         });
         
         //insere a matricula

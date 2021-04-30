@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 //invocar o controller
-const estacionamentos_controller = require('../controllers/estacionamentosController');
+const estacionamentos_controller = require('../controllers/estacionamentosMatriculasController');
 
 //route regista matriculas
 router.route("/AddMatriculas/:n").post(estacionamentos_controller.AddMatriculas);
