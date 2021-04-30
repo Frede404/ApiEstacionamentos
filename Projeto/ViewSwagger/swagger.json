@@ -11,8 +11,9 @@
     "http"
   ],
   "paths": {
-    "/AddMatriculas/{n}": {
+    "/Matriculas/AddMatriculas/{n}": {
       "post": {
+        "tags": ["Matriculas"],
         "description": "Quantas matriculas pretende inserir?",
         "operationId": "Inserir matriculas na Base de Dados",
         "parameters": [
@@ -26,88 +27,11 @@
         "responses": {}
       }
     },
-    "/DelMatriculas": {
+    "/Matriculas/DelMatriculas": {
       "delete": {
+        "tags": ["Matriculas"],
         "description": "Apagar todas as matriculas",
         "operationId": "Apagar todas Matriculas na Base de Dados",
-        "responses": {}
-      }
-    },
-    "/sub/{a}&{b}": {
-      "get": {
-        "description": "Responds with a difference between two numbers.",
-        "operationId": "Subtract two integers",
-        "parameters": [
-          {
-            "name": "a",
-            "in": "path",
-            "description": "First operand. Default value is <code>100</code>.",
-            "required": true,
-            "default": "100"
-          },
-          {
-            "name": "b",
-            "in": "path",
-            "description": "Second operand. Default value is <code>50</code>.",
-            "required": true,
-            "default": "50",
-            "enum": [
-              "50"
-            ]
-          }
-        ],
-        "responses": {}
-      }
-    },
-    "/div/{a}&{b}": {
-      "get": {
-        "description": "Responds with a quotient of two numbers.",
-        "operationId": "Divide two integers",
-        "parameters": [
-          {
-            "name": "a",
-            "in": "path",
-            "description": "First operand. Default value is <code>100</code>.",
-            "required": true,
-            "default": "100",
-            "enum": [
-              "100"
-            ]
-          },
-          {
-            "name": "b",
-            "in": "path",
-            "description": "Second operand. Default value is <code>20</code>.",
-            "required": true,
-            "default": "20",
-            "enum": [
-              "20"
-            ]
-          }
-        ],
-        "responses": {}
-      }
-    },
-    "/mul/{a}&{b}": {
-      "get": {
-        "description": "Responds with a product of two numbers.",
-        "operationId": "Multiply two integers",
-        "parameters": [
-          {
-            "name": "a",
-            "in": "path",
-            "description": "First operand. Default value is <code>20</code>.",
-            "required": true,
-            "default": "20"
-          },
-          {
-            "name": "b",
-            "in": "path",
-            "description": "Second operand. Default value is <code>5</code>.",
-            "required": true,
-            "default": "5"
-          }
-        ],
         "responses": {}
       }
     }

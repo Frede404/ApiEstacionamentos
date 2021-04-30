@@ -8,7 +8,7 @@ const swaggerDocument = require('./ViewSwagger/swagger.json');
 //Porto Lógico
 const porto = 8081; 
 
-const routes = require("./routes/estacionamentosMatriculasRoutes");
+const MatriculasRoutes = require("./routes/estacionamentosMatriculasRoutes");
 
 //iniciar app express
 const app = express();
@@ -32,7 +32,7 @@ app.use(
   swaggerUi.setup(swaggerDocument)
 );
 
-app.use("/", routes);
+app.use("/Matriculas", MatriculasRoutes);
 
 app.use(express.json());
 // Iniciar servidor
