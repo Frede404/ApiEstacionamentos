@@ -22,20 +22,29 @@ exports.divisao = function (req, res) {
     res.send(c.toString());
 }
 var Registo = require ('../models/estacionamentosModel');
-exports.soma = function(req, res){
+exports.soma = async function(req, res){
 	
-	let registo = new  Registo({
-        _id: req.params.a,
-		nome: req.params.a,
-        email: req.params.b,
-		
-	});
-	
-	registo.save(function(err){
-		
-		if(err){
-			throw err;
-		}
-		res.send('Pessoa registada sucesso!')
-	})
+    let quantidade = req.params.a
+    
+    for(i=1; i<=quantidade; i++){
+        let numeroa = Math.floor(Math.random() * (9)) ;
+        let numerob = Math.floor(Math.random() * (9)) ;
+        let numeroc = Math.floor(Math.random() * (9)) ;
+        let numerod = Math.floor(Math.random() * (9)) ;
+        let letraa = Math.floor(Math.random() * (91 - 65)) + 65;
+        let letrab = Math.floor(Math.random() * (91 - 65)) + 65;
+                
+        let registo = new  Registo({
+            _id: i,
+            nMatricula: '' + numeroa + numerob + '-' + String.fromCharCode(letraa) + String.fromCharCode(letrab) + '-' + numeroc + numerod,
+        });
+        
+        registo.save(function(err){
+            
+            if(err){
+                throw err;
+            }
+        })
+    }
+    res.send('Pessoa registada sucesso!')
 };
