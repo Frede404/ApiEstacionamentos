@@ -34,6 +34,97 @@
         "operationId": "Apagar todas Matriculas na Base de Dados",
         "responses": {}
       }
+    },
+
+    "/Parque/LugaresVagos": {
+      "get": {
+        "tags": ["Lugares Vagos"],
+        "description": "Lugares vagos no parque",
+        "operationId": "Lugares vagos no parque",
+        "responses": {}
+      }
+    },
+    "/Parque/Media/{periodo}": {
+      "get": {
+        "tags": ["Parque"],
+        "description": "Media de carros por num periodo",
+        "operationId": "Ver a media de carros num periodo",
+        "parameters": [
+          {
+            "name": "periodo",
+            "in": "path",
+            "description": "tipo de periodo para a media",
+            "required": true,
+            "default": "dia",
+            "enum": [
+              "dia",
+              "mes",
+              "ano"
+            ]
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/Parque/DiaMaisCarros": {
+      "get": {
+        "tags": ["Parque"],
+        "description": "Dia do Parque em que houve mais entradas",
+        "operationId": "Dia com mais carros",
+        "responses": {}
+      }
+    },
+    "/Parque/EntradasCarro/{Matricula}&{Dia}": {
+      "get": {
+        "tags": ["Parque"],
+        "description": "Numero de entradas de um carro num determinado dia",
+        "operationId": "Numero de entradas dum carro numa data",
+        "parameters": [
+          {
+            "name": "Matricula",
+            "in": "path",
+            "description": "Matricula do carro que pretende pesquisar as entradas",
+            "required": true
+          },
+          {
+            "name": "Dia",
+            "in": "path",
+            "description": "Dia que pretende pesquisar",
+            "required": true
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/Parque/CarrosPeriodo/{DataInicio}&{DataFim}": {
+      "get": {
+        "tags": ["Parque"],
+        "description": "Numero de carros num certo intervalo de datas",
+        "operationId": "Numero de carros num certo periodo",
+        "parameters": [
+          {
+            "name": "DataInicio",
+            "in": "path",
+            "description": "Data inicial da pesquisa",
+            "required": true
+          },
+          {
+            "name": "DataFim",
+            "in": "path",
+            "description": "Data Final da Pesquisa",
+            "required": true
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/Parque/RegistaSaida": {
+      "put": {
+        "tags": ["Parque"],
+        "description": "Regista Saida dum carro",
+        "operationId": "Regista Saida dum carro",
+        "responses": {}
+      }
     }
   }
 }
