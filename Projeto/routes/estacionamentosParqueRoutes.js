@@ -38,7 +38,8 @@ router.route("/ResetParque/:n").put(parque_controller.ResetParque);
 //router.route("/QtsNRegistado/:data").get(parques_controller.QtsNRegistado);
 
 //route Registo de saida de um carro
-//router.route("/RegistaEntrada/:matricula").post(parques_controller.RegistaEntrada);
+//router.route("/RegistaEntrada/:matricula").put(parques_controller.RegistaEntrada);
+router.route("/RegistaEntrada/:matricula&:datatestes").put(parques_controller.RegistaEntrada);//aqui apagar
 
 //route Registo de saida de um carro
 //router.route("/DiasLotado").post(parques_controller.DiasLotado);

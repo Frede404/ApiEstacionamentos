@@ -1,4 +1,4 @@
-var Matricula = require ('../models/estacionamentosMatriculasModel');
+var MatriculaModel = require ('../models/estacionamentosMatriculasModel');
 
 exports.AddMatriculas = async function(req, res){
 	
@@ -17,7 +17,7 @@ exports.AddMatriculas = async function(req, res){
         (procura matricula a inserir se existir voltar a gerar)*/
 
         //formata a matricula para ser inserida
-        let registo = new  Matricula({
+        let registo = new  MatriculaModel({
             _id: i,
             nMatricula: '' + numeroa + numerob + '-' + String.fromCharCode(letraa) +
              String.fromCharCode(letrab) + '-' + numeroc + numerod,
@@ -36,7 +36,7 @@ exports.AddMatriculas = async function(req, res){
 }
 
 exports.DelMatriculas = function(req, res){
-    Matricula.remove(function(err){
+    MatriculaModel.remove(function(err){
         if(err){
             throw err;
         }

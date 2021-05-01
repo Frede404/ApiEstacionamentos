@@ -46,7 +46,7 @@
             "in": "path",
             "description": "inserir o numero de lugares vagos",
             "required": true,
-            "default": "150"
+            "default": "5"
           }
         ],
         "responses": {}
@@ -61,8 +61,8 @@
         "responses": {}
       }
     },
-    "/Parque/RegistaEntrada/{matricula}": {
-      "post": {
+    "/Parque/RegistaEntrada/{matricula}&{datatestes}": {
+      "put": {
         "tags": ["Parque"],
         "description": "Regista Entrada de um carro",
         "operationId": "Regista Entrada de um carro",
@@ -71,6 +71,12 @@
             "name": "matricula",
             "in": "path",
             "description": "Registo de entrada de um carro",
+            "required": true
+          },
+          {
+            "name": "datatestes",
+            "in": "path",
+            "description": "meter uma data para testes",
             "required": true
           }
         ],
