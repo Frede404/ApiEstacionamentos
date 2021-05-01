@@ -136,7 +136,7 @@
         "responses": {}
       }
     },
-    "/Parque/QtsNRegistado/{data}": {
+    "/Parque/QtdNRegistados/{data}": {
       "get": {
         "tags": ["Parque"],
         "description": "Numero de carros não registados que entraram num certo dia",

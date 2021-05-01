@@ -49,10 +49,18 @@ exports.RegistaEntrada = async function(req, res){
 				let auxlugar = parseInt('' + lugares.qtd, 10);
 				auxlugar= auxlugar -1;
 
+				var datainicio = req.params.datatestes
+    
+				var datePartinicio = datainicio.split("/");
+			
+				// month is 0-based, that's why we need dataParts[1] - 1
+				var dateObject = new Date(+datePartinicio[2], datePartinicio[1] - 1, +datePartinicio[0]);
+
 				let registo = new RegistoEntradasModel({
 					_id: correnteID,
 					matricula: matriculaInserir,
-					dataEntrada: req.params.datatestes,//dia,aqui
+					dataEntrada: req.params.datatestes,//dia,//aqui
+					dataEntradaInv: dateObject,//dataTime.getFullYear() + '/' + (dataTime.getMonth()+1) + '/' + dataTime.getDate(),
 					horaEntrada: horas,
 					registada: Mregistada,
 					lotacao: auxlugar
@@ -75,5 +83,24 @@ exports.RegistaEntrada = async function(req, res){
 			})
 		})
 		
+	})
+}
+
+exports.QtdDia = function(req, res){
+	RegistoEntradasModel.find({dataEntrada: req.params.data},function(err,registos){
+		res.send(registos);
+	})
+}
+
+exports.QtdNRegistados = function(req, res){
+	var datainicio = req.params.data
+    
+	var datePartinicio = datainicio.split("/");
+
+	// month is 0-based, that's why we need dataParts[1] - 1
+	var dateObject = new Date(+datePartinicio[2], datePartinicio[1] - 1, +datePartinicio[0]);
+
+	RegistoEntradasModel.find({dataEntradaInv: {$lte: dateObject}},function(err,registos){
+		res.send(registos);
 	})
 }

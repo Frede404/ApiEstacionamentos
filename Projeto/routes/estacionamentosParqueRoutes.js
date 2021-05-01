@@ -25,10 +25,10 @@ router.route("/RegistaEntrada/:matricula&:datatestes").put(parques_controller.Re
 router.route("/Media/:periodo").get(parque_controller.MediaCarros);
 
 //route quantos carros entraram num certo dia
-//router.route("/QtdDia/:data").get(parques_controller.QtdDia);
+router.route("/QtdDia/:data").get(parques_controller.QtdDia);
 
 //route quantos carros nao registados entraram num certo dia 
-//router.route("/QtsNRegistado/:data").get(parques_controller.QtsNRegistado);
+router.route("/QtdNRegistados/:data").get(parques_controller.QtdNRegistados);
 
 //route MaisCarros
 //router.route("/DiaMaisCarros").get(parque_controller.MaiorDia);
