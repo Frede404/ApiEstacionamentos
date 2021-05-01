@@ -22,16 +22,6 @@ exports.ResetParque = async function(req, res){
 exports.MediaCarros = async function(req, res){
 
     let periodo = req.params.periodo;
-    /*let primeiroRegisto = RegistoEntradasModel.findOne().sort('_id');
-    let ultimoRegisto = RegistoEntradasModel.findOne().sort('-_id');*/
-    /*let datainicio = primeiroRegisto.dataEntrada;
-    let datafim = ultimoRegisto.dataEntrada;*/
-
-    //console.log("primeiro registo "+primeiroRegisto);
-
-    //console.log("data inicio (" + datainicio + ") data fim: (" + datafim + ")");
-
-    
     
     RegistoEntradasModel.countDocuments({}, function(err, registoEntradas){
         RegistoEntradasModel.findOne({},{_id: 0, dataEntrada: 1}).sort('_id').exec(function(err, datainicio){
@@ -76,19 +66,8 @@ exports.MediaCarros = async function(req, res){
 
                 res.send('' + periodo + ' entre as duas datas: ' + resultado +' a média de caros por '+ req.params.periodo + ' é: ' + registoEntradas)
             })
-            
         })
-    })
-
-    //console.log(registoEntradas);
-    
-    //var datainicio = "24/12/2019"; // Oct 23
-    
-    
-
-    //console.log("dias entre as duas datas: " + resultado);
-
-    
+    })    
 };
 
 exports.MaiorDia = async function(req, res){
