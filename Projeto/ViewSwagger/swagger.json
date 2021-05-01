@@ -35,6 +35,14 @@
         "responses": {}
       }
     },
+    "/Parque/DelEstacionamentos": {
+      "delete": {
+        "tags": ["Matriculas"],
+        "description": "Apagar todos os estacionamentos",
+        "operationId": "Apagar todos os estacionamentos na Base de Dados",
+        "responses": {}
+      }
+    },
     "/Parque/ResetParque/{n}": {
       "put": {
         "tags": ["Matriculas"],
@@ -91,6 +99,27 @@
         "responses": {}
       }
     },
+    "/Parque/Media/{periodo}": {
+      "get": {
+        "tags": ["Parque"],
+        "description": "Media de carros por num periodo",
+        "operationId": "Ver a media de carros num periodo",
+        "parameters": [
+          {
+            "name": "periodo",
+            "in": "path",
+            "description": "tipo de periodo para a media",
+            "required": true,
+            "enum": [
+              "dias",
+              "meses",
+              "anos"
+            ]
+          }
+        ],
+        "responses": {}
+      }
+    },
     "/Parque/QtdDia/{data}": {
       "get": {
         "tags": ["Parque"],
@@ -118,27 +147,6 @@
             "in": "path",
             "description": "data",
             "required": true
-          }
-        ],
-        "responses": {}
-      }
-    },
-    "/Parque/Media/{periodo}": {
-      "get": {
-        "tags": ["Parque"],
-        "description": "Media de carros por num periodo",
-        "operationId": "Ver a media de carros num periodo",
-        "parameters": [
-          {
-            "name": "periodo",
-            "in": "path",
-            "description": "tipo de periodo para a media",
-            "required": true,
-            "enum": [
-              "dias",
-              "meses",
-              "anos"
-            ]
           }
         ],
         "responses": {}

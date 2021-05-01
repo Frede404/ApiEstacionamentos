@@ -2,6 +2,15 @@ var LugaresModel = require ('../models/estacionamentosLugaresModel');
 var RegistoEntradasModel = require('../models/estacionamentosRegistoEntradasModel');
 var MatriculaModel = require ('../models/estacionamentosMatriculasModel');
 
+exports.DelEstacionamentos = function(req, res){
+    RegistoEntradasModel.remove(function(err){
+        if(err){
+            throw err;
+        }
+        res.send('Matriculas Apagadas com sucesso!')
+    })
+}
+
 exports.RegistaEntrada = async function(req, res){
     //Data do sistema
 	let timeStamp = Date.now();
