@@ -15,6 +15,10 @@ let RegistoEntradasSchema = new Schema({
         type: String,
         required: true
     },
+    dataEntradaInv: {
+        type: String,
+        required: true
+    },
     horaEntrada: {
         type: String,
         required: true
