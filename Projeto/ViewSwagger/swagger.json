@@ -61,6 +61,62 @@
         "responses": {}
       }
     },
+    "/Parque/RegistaEntrada/{matricula}": {
+      "post": {
+        "tags": ["Parque"],
+        "description": "Regista Entrada de um carro",
+        "operationId": "Regista Entrada de um carro",
+        "parameters": [
+          {
+            "name": "matricula",
+            "in": "path",
+            "description": "Registo de entrada de um carro",
+            "required": true
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/Parque/RegistaSaida": {
+      "put": {
+        "tags": ["Parque"],
+        "description": "Regista Saida de um carro",
+        "operationId": "Regista Saida de um carro",
+        "responses": {}
+      }
+    },
+    "/Parque/QtdDia/{data}": {
+      "get": {
+        "tags": ["Parque"],
+        "description": "Numero de carros que entraram num certo dia",
+        "operationId": "Ver o numero de carros que entraram num certo dia",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "path",
+            "description": "data",
+            "required": true
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/Parque/QtsNRegistado/{data}": {
+      "get": {
+        "tags": ["Parque"],
+        "description": "Numero de carros não registados que entraram num certo dia",
+        "operationId": "Ver o numero de carros não registados que entraram num certo dia",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "path",
+            "description": "data",
+            "required": true
+          }
+        ],
+        "responses": {}
+      }
+    },
     "/Parque/Media/{periodo}": {
       "get": {
         "tags": ["Parque"],
@@ -72,11 +128,10 @@
             "in": "path",
             "description": "tipo de periodo para a media",
             "required": true,
-            "default": "dia",
             "enum": [
-              "dia",
-              "mes",
-              "ano"
+              "dias",
+              "meses",
+              "anos"
             ]
           }
         ],
@@ -88,6 +143,14 @@
         "tags": ["Parque"],
         "description": "Dia do Parque em que houve mais entradas",
         "operationId": "Dia com mais carros",
+        "responses": {}
+      }
+    },
+    "/Parque/MenorDia": {
+      "get": {
+        "tags": ["Parque"],
+        "description": "Dia do Parque em que houve menos entradas",
+        "operationId": "Dia com menos carros",
         "responses": {}
       }
     },
@@ -135,27 +198,11 @@
         "responses": {}
       }
     },
-    "/Parque/RegistaEntrada/{matricula}": {
-      "post": {
+    "/Parque/DiasLotado": {
+      "get": {
         "tags": ["Parque"],
-        "description": "Regista Entrada de um carro",
-        "operationId": "Regista Entrada de um carro",
-        "parameters": [
-          {
-            "name": "matricula",
-            "in": "path",
-            "description": "Registo de entrada de um carro",
-            "required": true
-          }
-        ],
-        "responses": {}
-      }
-    },
-    "/Parque/RegistaSaida": {
-      "put": {
-        "tags": ["Parque"],
-        "description": "Regista Saida de um carro",
-        "operationId": "Regista Saida de um carro",
+        "description": "Dias em que o estacionamento ficou lotado",
+        "operationId": "Dias em que o estacionamento ficou lotado", 
         "responses": {}
       }
     }
