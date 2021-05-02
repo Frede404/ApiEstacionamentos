@@ -18,7 +18,27 @@ exports.ResetParque = async function(req, res){
         res.send('Matriculas registadas sucesso!')
     })
 }
+exports.LugaresVagos = function(req, res){
+    LugaresModel.findOne({},function(err, lVagos){
+        res.send(lVagos.qtd);
+    })
+}
 
+exports.RegistaSaida = function(req, res){
+    LugaresModel.findOne({}, function(err, saida){
+        let lug = parseInt('' + saida.qtd, 10)
+        saida.qtd = lug + 1;
+
+        saida.save(function(err){
+            
+            if(err){
+                throw err;
+            }
+        })
+        console.log(saida.qtd);
+        res.send('Saida registada com sucesso!')
+    })
+}
 exports.MediaCarros = async function(req, res){
 
     let periodo = req.params.periodo;
@@ -94,3 +114,15 @@ exports.MaiorDia = async function(req, res){
 	});
 }
 
+exports.QtdDiaCarro = async function(req, res){
+    let data = req.params.data;
+    let matricula = req.params.matricula.toUpperCase();
+    RegistoEntradasModel.countDocuments({dataEntrada: data, matricula: matricula}, function(err, resultado){
+        //console.log('data: ' + resultado);
+        res.send('O carro pesquisado entrou ' + resultado + ' vezes no dia ' + data)
+    })
+}
+
+exports.QtdPeriodo = function(req, res){
+    
+}

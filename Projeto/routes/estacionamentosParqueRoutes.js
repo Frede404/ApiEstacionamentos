@@ -12,14 +12,14 @@ router.route("/DelEstacionamentos").delete(parques_controller.DelEstacionamentos
 router.route("/ResetParque/:n").put(parque_controller.ResetParque);
  
 //route Lugares Vagos
-//router.route("/LugaresVagos").get(parque_controller.LugaresVagos);
+router.route("/LugaresVagos").get(parque_controller.LugaresVagos);
  
 //route Registo de entrada de um carro
 //router.route("/RegistaEntrada/:matricula").put(parques_controller.RegistaEntrada);
 router.route("/RegistaEntrada/:matricula&:datatestes").put(parques_controller.RegistaEntrada);//aqui apagar
  
 //route Registo de saida de um carro
-//router.route("/RegistaSaida").put(parque_controller.RegistaSaida);
+router.route("/RegistaSaida").put(parque_controller.RegistaSaida);
  
 //route media
 router.route("/Media/:periodo").get(parque_controller.MediaCarros);
@@ -37,7 +37,7 @@ router.route("/DiaMaisCarros").get(parque_controller.MaiorDia);
 router.route("/DiaMenosCarros").get(parques_controller.MenorDia);
  
 //route entradas do Carro num dia
-//router.route("/EntradasCarro/:matricula&:dia").get(parque_controller.QtdDiaCarro);
+router.route("/EntradasCarro/:matricula/:data").get(parque_controller.QtdDiaCarro);
  
 //route numero de carros num periudo
 //router.route("/CarrosPeriodo/:DataInicio&:DataFim").get(parque_controller.QtdPeriodo);

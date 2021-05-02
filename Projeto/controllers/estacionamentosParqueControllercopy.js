@@ -25,9 +25,9 @@ exports.RegistaEntrada = async function(req, res){
 	let dia = dataTime.getDate() + '/' + (dataTime.getMonth()+1) + '/' + dataTime.getFullYear();
 	let horas = dataTime.getHours() + ':' + dataTime.getMinutes()
 
-	let matriculaInserir = req.params.matricula;
+	let matriculaInserir = req.params.matricula.toUpperCase();
 
-	MatriculaModel.countDocuments({nMatricula: matriculaInserir.toUpperCase()},function(err, qtdmatricula){
+	MatriculaModel.countDocuments({nMatricula: matriculaInserir},function(err, qtdmatricula){
 		RegistoEntradasModel.findOne().sort('-_id').exec(function(err,ultimoID){
 			LugaresModel.findById(1, function(err,lugares){
 			RegistoEntradasModel.countDocuments({dataEntrada: req.params.datatestes/*dia*/},function(err, entrada){

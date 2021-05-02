@@ -168,20 +168,20 @@
         "responses": {}
       }
     },
-    "/Parque/EntradasCarro/{Matricula}&{Dia}": {
+    "/Parque/EntradasCarro/{matricula}/{data}": {
       "get": {
         "tags": ["Parque"],
         "description": "Numero de entradas de um carro num determinado dia",
         "operationId": "Numero de entradas dum carro numa data",
         "parameters": [
           {
-            "name": "Matricula",
+            "name": "matricula",
             "in": "path",
             "description": "Matricula do carro que pretende pesquisar as entradas",
             "required": true
           },
           {
-            "name": "Dia",
+            "name": "data",
             "in": "path",
             "description": "Dia que pretende pesquisar",
             "required": true
