@@ -71,14 +71,26 @@ exports.MediaCarros = async function(req, res){
 };
 
 exports.MaiorDia = async function(req, res){
-
     RegistoEntradasModel.aggregate([
 		{$group: {"_id":"$dataEntrada",entrada: {$max: '$nEntrada'}}}
 	],function(err,maximosE){
 
-        console.log("Maximos: " + maximosE);
-    });
+        //adaptado de https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value 02/05/2021
+		function ordenar(a,b){
+			if(a.entrada < b.entrada){
+				return 1;
+			}
+			if(a.entrada > b.entrada){
+				return -1;
+			}
+			return 0;
+		}
+		//ordena os dados
+		maximosE.sort(ordenar);
+		
+        maximosE = maximosE.filter(p => p.entrada == maximosE[0].entrada);
 
-    res.send('')
+		res.send(maximosE);
+	});
 }
 

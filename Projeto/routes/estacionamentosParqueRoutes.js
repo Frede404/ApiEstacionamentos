@@ -31,7 +31,7 @@ router.route("/QtdDia/:data").get(parques_controller.QtdDia);
 router.route("/QtdNRegistados/:data").get(parques_controller.QtdNRegistados);
  
 //route MaisCarros
-//router.route("/DiaMaisCarros").get(parque_controller.MaiorDia);
+router.route("/DiaMaisCarros").get(parque_controller.MaiorDia);
  
 //route MenosCarros
 router.route("/DiaMenosCarros").get(parques_controller.MenorDia);
