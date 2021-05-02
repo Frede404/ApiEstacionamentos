@@ -30,56 +30,63 @@ exports.RegistaEntrada = async function(req, res){
 	MatriculaModel.countDocuments({nMatricula: matriculaInserir.toUpperCase()},function(err, qtdmatricula){
 		RegistoEntradasModel.findOne().sort('-_id').exec(function(err,ultimoID){
 			LugaresModel.findById(1, function(err,lugares){
-				let correnteID=0;
+			RegistoEntradasModel.countDocuments({dataEntrada: req.params.datatestes/*dia*/},function(err, entrada){
+					entrada=entrada+1;
 
-				if(ultimoID == null){
-					correnteID=0;
-				}else{
-					correnteID = parseInt('' + ultimoID.id, 10);
-				}
-				correnteID=correnteID+1;
+					let correnteID=0;
 
-				let Mregistada=true;
+					if(ultimoID == null){
+						correnteID=0;
+					}else{
+						correnteID = parseInt('' + ultimoID.id, 10);
+					}
+					correnteID=correnteID+1;
 
-				if(qtdmatricula<=0){
-					matriculaInserir='-';
-					Mregistada=false;
-				}
+					let Mregistada=true;
 
-				let auxlugar = parseInt('' + lugares.qtd, 10);
-				auxlugar= auxlugar -1;
-
-				var datainicio = req.params.datatestes
-    
-				var datePartinicio = datainicio.split("/");
-			
-				// month is 0-based, that's why we need dataParts[1] - 1
-				var dateObject = new Date(+datePartinicio[2], datePartinicio[1] - 1, +datePartinicio[0]);
-
-				let registo = new RegistoEntradasModel({
-					_id: correnteID,
-					matricula: matriculaInserir,
-					dataEntrada: req.params.datatestes,//dia,//aqui
-					dataEntradaInv: dateObject,//dataTime.getFullYear() + '/' + (dataTime.getMonth()+1) + '/' + dataTime.getDate(),
-					horaEntrada: horas,
-					registada: Mregistada,
-					lotacao: auxlugar
-				})
-
-				registo.save(function (err){
-					if(err){
-						throw err;
+					if(qtdmatricula<=0){
+						matriculaInserir='-';
+						Mregistada=false;
 					}
 
-					lugares.qtd=auxlugar
-					lugares.save(function (err){
+					let auxlugar = parseInt('' + lugares.qtd, 10);
+					
+
+					var datainicio = req.params.datatestes
+		
+					var datePartinicio = datainicio.split("/");
+				
+					// month is 0-based, that's why we need dataParts[1] - 1
+					var dateObject = new Date(+datePartinicio[2], datePartinicio[1] - 1, +datePartinicio[0]);
+
+					let registo = new RegistoEntradasModel({
+						_id: correnteID,
+						matricula: matriculaInserir,
+						dataEntrada: req.params.datatestes,//dia,//aqui
+						dataEntradaInv: dateObject,//dataTime.getFullYear() + '/' + (dataTime.getMonth()+1) + '/' + dataTime.getDate(),
+						horaEntrada: horas,
+						registada: Mregistada,
+						lotacao: auxlugar,
+						nEntrada: entrada
+					})
+
+					auxlugar= auxlugar -1;
+
+					registo.save(function (err){
 						if(err){
 							throw err;
 						}
-					})
-				})
 
-				res.send('Entrada no dia ' + dia + ' e as ' + horas + ' horas registada com sucesso!')
+						lugares.qtd=auxlugar
+						lugares.save(function (err){
+							if(err){
+								throw err;
+							}
+						})
+					})
+
+					res.send('Entrada no dia ' + dia + ' e as ' + horas + ' horas registada com sucesso!')
+				})
 			})
 		})
 		
@@ -93,7 +100,7 @@ exports.QtdDia = function(req, res){
 }
 
 exports.QtdNRegistados = function(req, res){
-	var datainicio = req.params.data
+	/*var datainicio = req.params.data
     
 	var datePartinicio = datainicio.split("/");
 
@@ -101,6 +108,40 @@ exports.QtdNRegistados = function(req, res){
 	var dateObject = new Date(+datePartinicio[2], datePartinicio[1] - 1, +datePartinicio[0]);
 
 	RegistoEntradasModel.find({dataEntradaInv: {$lte: dateObject}},function(err,registos){
+		res.send(registos);
+	})*/
+	RegistoEntradasModel.find({dataEntrada: req.params.data, matricula: '-'},function(err,registos){
+		res.send(registos);
+	})
+}
+
+exports.MenorDia = async function(req, res){
+	RegistoEntradasModel.aggregate([
+		{$group: {"_id":"$dataEntrada",entrada: {$max: '$nEntrada'}}}
+	],function(err,registos){
+
+		//adaptado de https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value 02/05/2021
+		function ordenar(a,b){
+			if(a.entrada < b.entrada){
+				return -1;
+			}
+			if(a.entrada > b.entrada){
+				return 1;
+			}
+			return 0;
+		}
+		//ordena os dados
+		registos.sort(ordenar);
+
+		//remove os dados que nao tenham o campo entrada desejado
+		registos=registos.filter(a => a.entrada == registos[0].entrada);
+
+		res.send(registos);
+	});
+}
+
+exports.DiasLotado = function(req, res){
+	RegistoEntradasModel.find({lotacao: {$lte:'0'}},function(err,registos){
 		res.send(registos);
 	})
 }

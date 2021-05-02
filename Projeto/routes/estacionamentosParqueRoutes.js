@@ -34,7 +34,7 @@ router.route("/QtdNRegistados/:data").get(parques_controller.QtdNRegistados);
 //router.route("/DiaMaisCarros").get(parque_controller.MaiorDia);
 
 //route MenosCarros
-//router.route("/MenorDia").get(parques_controller.MenorDia);
+router.route("/DiaMenosCarros").get(parques_controller.MenorDia);
 
 //route entradas do Carro num dia
 //router.route("/EntradasCarro/:matricula&:dia").get(parque_controller.QtdDiaCarro);
@@ -43,6 +43,6 @@ router.route("/QtdNRegistados/:data").get(parques_controller.QtdNRegistados);
 //router.route("/CarrosPeriodo/:DataInicio&:DataFim").get(parque_controller.QtdPeriodo);
 
 //route Registo de saida de um carro
-//router.route("/DiasLotado").post(parques_controller.DiasLotado);
+router.route("/DiasLotado").get(parques_controller.DiasLotado);
 
 module.exports = router;

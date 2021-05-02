@@ -160,7 +160,7 @@
         "responses": {}
       }
     },
-    "/Parque/MenorDia": {
+    "/Parque/DiaMenosCarros": {
       "get": {
         "tags": ["Parque"],
         "description": "Dia do Parque em que houve menos entradas",

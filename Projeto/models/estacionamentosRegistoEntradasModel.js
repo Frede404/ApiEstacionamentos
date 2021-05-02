@@ -30,6 +30,10 @@ let RegistoEntradasSchema = new Schema({
     lotacao: {
         type: Number,
         required: true
+    },
+    nEntrada: {
+        type: Number,
+        required: true
     }
 });
 
