@@ -58,6 +58,7 @@ exports.RegistaEntrada = async function(req, res){
 				
 					// month is 0-based, that's why we need dataParts[1] - 1
 					var dateObject = new Date(+datePartinicio[2], datePartinicio[1] - 1, +datePartinicio[0]);
+					
 
 					let registo = new RegistoEntradasModel({
 						_id: correnteID,

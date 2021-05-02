@@ -190,7 +190,7 @@
         "responses": {}
       }
     },
-    "/Parque/CarrosPeriodo/{DataInicio}&{DataFim}": {
+    "/Parque/CarrosPeriodo/{DataInicio}/{DataFim}": {
       "get": {
         "tags": ["Parque"],
         "description": "Numero de carros num certo intervalo de datas",

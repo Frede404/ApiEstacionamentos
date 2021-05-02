@@ -124,5 +124,15 @@ exports.QtdDiaCarro = async function(req, res){
 }
 
 exports.QtdPeriodo = function(req, res){
+    let dataInicio = req.params.DataInicio;
+    let dataFim = req.params.DataFim;
     
+    RegistoEntradasModel.countDocuments({$and:[{dataEntrada:{$gte: dataInicio}},{dataEntrada:{$lte: dataFim}}]}, function(err, nCarros){
+        
+        console.log(dataInicio);
+        console.log(dataFim);
+        console.log('Numero de carros: ' + nCarros);
+        
+        res.send('Entre as datas inseridas entraram: ' + nCarros + ' carros.');
+    })
 }

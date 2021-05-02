@@ -40,7 +40,7 @@ router.route("/DiaMenosCarros").get(parques_controller.MenorDia);
 router.route("/EntradasCarro/:matricula/:data").get(parque_controller.QtdDiaCarro);
  
 //route numero de carros num periudo
-//router.route("/CarrosPeriodo/:DataInicio&:DataFim").get(parque_controller.QtdPeriodo);
+router.route("/CarrosPeriodo/:DataInicio/:DataFim").get(parque_controller.QtdPeriodo);
  
 //route Registo de saida de um carro
 router.route("/DiasLotado").get(parques_controller.DiasLotado);
