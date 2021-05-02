@@ -72,7 +72,12 @@ exports.MediaCarros = async function(req, res){
 
 exports.MaiorDia = async function(req, res){
 
-    RegistoEntradas.aggregate([{$group:{"dataEntrada": "", totalDia: {$count: "$_id"}}}]);
+    RegistoEntradasModel.aggregate([
+		{$group: {"_id":"$dataEntrada",entrada: {$max: '$nEntrada'}}}
+	],function(err,maximosE){
+
+        console.log("Maximos: " + maximosE);
+    });
 
     res.send('')
 }
