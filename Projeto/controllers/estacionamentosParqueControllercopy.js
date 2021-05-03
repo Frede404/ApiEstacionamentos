@@ -1,26 +1,19 @@
-var LugaresModel = require ('../models/estacionamentosLugaresModel');
-var RegistoEntradasModel = require('../models/estacionamentosRegistoEntradasModel');
-var MatriculaModel = require ('../models/estacionamentosMatriculasModel');
+var LugaresModel = require ('../models/LugaresModel');
+var RegistoEntradasModel = require('../models/RegistoEntradasModel');
+var MatriculaModel = require ('../models/MatriculasModel');
 
-exports.DelEstacionamentos = function(req, res){
-    RegistoEntradasModel.remove(function(err){
-        if(err){
-            throw err;
-        }
-        res.send('Matriculas Apagadas com sucesso!')
-    })
-}
 
+/*
 exports.RegistaEntrada = async function(req, res){
     //Data do sistema
 	let timeStamp = Date.now();
 	let dataTime = new Date(timeStamp);
-	/*let dia = dataTime.getDate();
-	let mes = dataTime.getMonth()+1;
-	let ano = dataTime.getFullYear();
-	let horas = dataTime.getHours();
-	let minutos = dataTime.getMinutes();
-	let segundos = dataTime.getSeconds();*/
+	//let dia = dataTime.getDate();
+	//let mes = dataTime.getMonth()+1;
+	//let ano = dataTime.getFullYear();
+	//let horas = dataTime.getHours();
+	//let minutos = dataTime.getMinutes();
+	//let segundos = dataTime.getSeconds();
 	
 	let dia = dataTime.getDate() + '/' + (dataTime.getMonth()+1) + '/' + dataTime.getFullYear();
 	let horas = dataTime.getHours() + ':' + dataTime.getMinutes()
@@ -30,7 +23,7 @@ exports.RegistaEntrada = async function(req, res){
 	MatriculaModel.countDocuments({nMatricula: matriculaInserir},function(err, qtdmatricula){
 		RegistoEntradasModel.findOne().sort('-_id').exec(function(err,ultimoID){
 			LugaresModel.findById(1, function(err,lugares){
-			RegistoEntradasModel.countDocuments({dataEntrada: req.params.datatestes/*dia*/},function(err, entrada){
+			RegistoEntradasModel.countDocuments({dataEntrada: req.params.datatestes/*dia*//*},function(err, entrada){
 					entrada=entrada+1;
 
 					let correnteID=0;
@@ -101,16 +94,6 @@ exports.QtdDia = function(req, res){
 }
 
 exports.QtdNRegistados = function(req, res){
-	/*var datainicio = req.params.data
-    
-	var datePartinicio = datainicio.split("/");
-
-	// month is 0-based, that's why we need dataParts[1] - 1
-	var dateObject = new Date(+datePartinicio[2], datePartinicio[1] - 1, +datePartinicio[0]);
-
-	RegistoEntradasModel.find({dataEntradaInv: {$lte: dateObject}},function(err,registos){
-		res.send(registos);
-	})*/
 	RegistoEntradasModel.find({dataEntrada: req.params.data, matricula: '-'},function(err,registos){
 		res.send(registos);
 	})
@@ -145,4 +128,4 @@ exports.DiasLotado = function(req, res){
 	RegistoEntradasModel.find({lotacao: {$lte:'0'}},function(err,registos){
 		res.send(registos);
 	})
-}
+}*/

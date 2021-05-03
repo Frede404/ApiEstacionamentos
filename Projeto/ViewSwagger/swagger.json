@@ -11,9 +11,9 @@
     "http"
   ],
   "paths": {
-    "/Matriculas/AddMatriculas/{n}": {
+    "/Administracao/PopularMatriculas/{n}": {
       "post": {
-        "tags": ["Matriculas"],
+        "tags": ["Administracao"],
         "description": "Quantas matriculas pretende inserir?",
         "operationId": "Inserir matriculas na Base de Dados",
         "parameters": [
@@ -27,25 +27,33 @@
         "responses": {}
       }
     },
-    "/Matriculas/DelMatriculas": {
+    "/Administracao/DelMatriculas": {
       "delete": {
-        "tags": ["Matriculas"],
+        "tags": ["Administracao"],
         "description": "Apagar todas as matriculas",
         "operationId": "Apagar todas Matriculas na Base de Dados",
         "responses": {}
       }
     },
-    "/Parque/DelEstacionamentos": {
+    "/Administracao/PopularEstacionamentos": {
+      "post": {
+        "tags": ["Administracao"],
+        "description": "Vai popular o estacionamento com 2 anos",
+        "operationId": "Inserir estacionamentos na Base de Dados",
+        "responses": {}
+      }
+    },
+    "/Administracao/DelEstacionamentos": {
       "delete": {
-        "tags": ["Matriculas"],
+        "tags": ["Administracao"],
         "description": "Apagar todos os estacionamentos",
         "operationId": "Apagar todos os estacionamentos na Base de Dados",
         "responses": {}
       }
     },
-    "/Parque/ResetParque/{n}": {
+    "/Administracao/ResetParque/{n}": {
       "put": {
-        "tags": ["Matriculas"],
+        "tags": ["Administracao"],
         "description": "Reset ao parque",
         "operationId": "Reset ao parque",
         "parameters": [
@@ -54,7 +62,7 @@
             "in": "path",
             "description": "inserir o numero de lugares vagos",
             "required": true,
-            "default": "5"
+            "default": "150"
           }
         ],
         "responses": {}
@@ -69,7 +77,7 @@
         "responses": {}
       }
     },
-    "/Parque/RegistaEntrada/{matricula}&{datatestes}": {
+    "/Parque/RegistaEntrada/{matricula}": {
       "put": {
         "tags": ["Parque"],
         "description": "Regista Entrada de um carro",
@@ -79,12 +87,6 @@
             "name": "matricula",
             "in": "path",
             "description": "Registo de entrada de um carro",
-            "required": true
-          },
-          {
-            "name": "datatestes",
-            "in": "path",
-            "description": "meter uma data para testes",
             "required": true
           }
         ],
@@ -99,7 +101,7 @@
         "responses": {}
       }
     },
-    "/Parque/Media/{periodo}": {
+    "/Parque/MediaCarros/{periodo}": {
       "get": {
         "tags": ["Parque"],
         "description": "Media de carros por num periodo",
@@ -120,7 +122,7 @@
         "responses": {}
       }
     },
-    "/Parque/QtdDia/{data}": {
+    "/Parque/QtdCarrosNumaData/{data}": {
       "get": {
         "tags": ["Parque"],
         "description": "Numero de carros que entraram num certo dia",
@@ -136,7 +138,7 @@
         "responses": {}
       }
     },
-    "/Parque/QtdNRegistados/{data}": {
+    "/Parque/QtdCarrosNRegistadosNumaData/{data}": {
       "get": {
         "tags": ["Parque"],
         "description": "Numero de carros não registados que entraram num certo dia",
@@ -152,7 +154,7 @@
         "responses": {}
       }
     },
-    "/Parque/DiaMaisCarros": {
+    "/Parque/DiaComMaisCarros": {
       "get": {
         "tags": ["Parque"],
         "description": "Dia do Parque em que houve mais entradas",
@@ -160,7 +162,7 @@
         "responses": {}
       }
     },
-    "/Parque/DiaMenosCarros": {
+    "/Parque/DiaComMenosCarros": {
       "get": {
         "tags": ["Parque"],
         "description": "Dia do Parque em que houve menos entradas",
@@ -168,7 +170,7 @@
         "responses": {}
       }
     },
-    "/Parque/EntradasCarro/{matricula}/{data}": {
+    "/Parque/EntradasCarroNumaData/{matricula}/{data}": {
       "get": {
         "tags": ["Parque"],
         "description": "Numero de entradas de um carro num determinado dia",
@@ -190,7 +192,7 @@
         "responses": {}
       }
     },
-    "/Parque/CarrosPeriodo/{DataInicio}/{DataFim}": {
+    "/Parque/CarrosEntreDatas/{DataInicio}/{DataFim}": {
       "get": {
         "tags": ["Parque"],
         "description": "Numero de carros num certo intervalo de datas",

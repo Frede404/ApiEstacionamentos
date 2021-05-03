@@ -8,14 +8,16 @@ const swaggerDocument = require('./ViewSwagger/swagger.json');
 //Porto Lógico
 const porto = 8081; 
 
-const MatriculasRoutes = require("./routes/estacionamentosMatriculasRoutes");
-const ParqueRoutes = require("./routes/estacionamentosParqueRoutes");
+//inicializacao das routes
+const MatriculasRoutes = require("./routes/AdministracaoRoutes");
+const ParqueRoutes = require("./routes/ParqueRoutes");
 
 //iniciar app express
 const app = express();
 
 //import mongoose library
 const mongoose = require('mongoose');
+
 //acesso a mongoDB
 let url = "mongodb+srv://TrabalhoEstacionamento:TEstacionamento123@estacionamentos.l18xu.mongodb.net/EstacionamentoDB?retryWrites=true&w=majority";
 let mongoDB = process.env.MONGODB_URI || url;
@@ -33,10 +35,11 @@ app.use(
   swaggerUi.setup(swaggerDocument)
 );
 
-app.use("/Matriculas", MatriculasRoutes);
+app.use("/Administracao", MatriculasRoutes);
 app.use("/Parque", ParqueRoutes);
 
 app.use(express.json());
+
 // Iniciar servidor
 app.listen(porto, () => {
 	console.log('Servidor a executar no porto ' + porto);

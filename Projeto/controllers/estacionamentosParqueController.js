@@ -1,24 +1,9 @@
-var LugaresModel = require ('../models/estacionamentosLugaresModel');
-var RegistoEntradasModel = require('../models/estacionamentosRegistoEntradasModel');
+var LugaresModel = require ('../models/LugaresModel');
+var RegistoEntradasModel = require('../models/RegistoEntradasModel');
 
-exports.ResetParque = async function(req, res){
-    let quantidade = req.params.n
 
-    Lugares.findById(1, function (err, registo) {
-        registo.qtd= quantidade
-        
-        //reset
-        registo.save(function(err){
-            
-            if(err){
-                throw err;
-            }
-        })
 
-        res.send('Matriculas registadas sucesso!')
-    })
-}
-exports.LugaresVagos = function(req, res){
+/*exports.LugaresVagos = function(req, res){
     LugaresModel.findOne({},function(err, lVagos){
         res.send(lVagos.qtd);
     })
@@ -39,6 +24,7 @@ exports.RegistaSaida = function(req, res){
         res.send('Saida registada com sucesso!')
     })
 }
+
 exports.MediaCarros = async function(req, res){
 
     let periodo = req.params.periodo;
@@ -135,4 +121,4 @@ exports.QtdPeriodo = function(req, res){
         
         res.send('Entre as datas inseridas entraram: ' + nCarros + ' carros.');
     })
-}
+}*/
