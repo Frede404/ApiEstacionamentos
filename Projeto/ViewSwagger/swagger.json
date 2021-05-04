@@ -5,7 +5,7 @@
     "description": "API para gerir estacionamentos",
     "version": "1.0"
   },
-  "host": "20.90.113.135:8081",
+  "host": "localhost:8081",
   "basePath": "/",
   "schemes": [
     "http"

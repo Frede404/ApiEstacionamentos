@@ -119,6 +119,7 @@ exports.MediaCarros = async function(req, res){
                 let diaMillis = 86400000;
                 let mesMillis = 2628000000;
                 let anoMillis = 31536000000;
+                let periodos = req.params.periodo;
 
                 datainicio = datainicio.dataEntrada;
                 datafim = datafim.dataEntrada;
@@ -136,10 +137,10 @@ exports.MediaCarros = async function(req, res){
                 //variavel de divisao para o calculo
                 var Millis = diaMillis;
                 
-                if(req.params.periodo == "meses"){
+                if(periodos == "meses"){
                     Millis = mesMillis;
 
-                }else if(req.params.periodo == "anos"){
+                }else if(periodos == "anos"){
                     Millis = anoMillis;
                 }
 
@@ -152,7 +153,10 @@ exports.MediaCarros = async function(req, res){
                 console.log("Ultimo registo: "+datafim);
                 console.log('' + periodo + ' entre as duas datas: ' + resultado);*/
 
-                res.send('' + periodo + ' entre as duas datas: ' + resultado +' a média de caros por '+ req.params.periodo + ' é: ' + registoEntradas)
+                res.json({
+                    Periodo: periodos,
+                    media: registoEntradas
+                });
             })
         })
     })    
@@ -228,16 +232,31 @@ exports.QtdDiaCarro = async function(req, res){
     let matricula = req.params.matricula.toUpperCase();
 
     RegistoEntradasModel.countDocuments({dataEntrada: data, matricula: matricula}, function(err, resultado){
-        res.send('O carro pesquisado entrou ' + resultado + ' vezes no dia ' + data)
+        res.json({
+            contagem: resultado,
+            dia: data
+        });
     })
 }
-
+//aqui
 exports.QtdPeriodo = function(req, res){
     let dataInicio = req.params.DataInicio;
     let dataFim = req.params.DataFim;
-    
-    RegistoEntradasModel.countDocuments({$and:[{dataEntrada:{$gte: dataInicio}},{dataEntrada:{$lte: dataFim}}]}, function(err, nCarros){
-        res.send('Entre as datas inseridas entraram: ' + nCarros + ' carros.');
+
+    var datePartinicio = dataInicio.split("/");
+
+    // month is 0-based, that's why we need dataParts[1] - 1
+    var dataInicial = datePartinicio[2] + '/' + datePartinicio[1] + '/' + datePartinicio[0];
+
+    var datePartsfim = dataFim.split("/");
+
+    // month is 0-based, that's why we need dataParts[1] - 1
+    var dataFinal = datePartsfim[2] + '/' + datePartsfim[1] + '/' + datePartsfim[0];
+
+    RegistoEntradasModel.countDocuments({$and:[{dataEntradaInv:{$gte: dataInicial}},{dataEntradaInv:{$lte: dataFinal}}]}, function(err, nCarros){
+        res.json({
+            Quantidade: nCarros
+        });
     })
 }
 
