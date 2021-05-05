@@ -21,7 +21,8 @@
             "name": "n",
             "in": "path",
             "description": "Numero de matriculas a inserir",
-            "required": true
+            "required": true,
+            "default": "10000"
           }
         ],
         "responses": {}
