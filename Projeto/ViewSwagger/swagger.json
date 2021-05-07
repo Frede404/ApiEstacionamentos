@@ -75,7 +75,12 @@
         "tags": ["Lugares Vagos"],
         "description": "Lugares vagos no parque",
         "operationId": "Lugares vagos no parque",
-        "responses": {}
+        "responses": {},
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       }
     },
     "/Parque/RegistaEntrada/{matricula}": {
@@ -238,9 +243,6 @@
             }
           }
         },
-      
-      
-      
         "api_key": {
           "type": "apiKey",
           "name": "api_key",
