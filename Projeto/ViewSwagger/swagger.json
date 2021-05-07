@@ -118,11 +118,14 @@
             "in": "path",
             "description": "tipo de periodo para a media",
             "required": true,
-            "enum": [
-              "dias",
-              "meses",
-              "anos"
-            ]
+            "schema":{
+              "type": "string",
+              "enum": [
+                "dias",
+                "meses",
+                "anos"
+              ]
+            }
           }
         ],
         "responses": {}
