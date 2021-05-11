@@ -11,6 +11,64 @@
     "http"
   ],
   "paths": {
+    "/user/newUser/{username}/{password}": {
+      "post": {
+        "tags": ["Utilizadores"],
+        "description": "Criar novo user",
+        "operationId": "Criar novo user",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "insira um nome de utilizador",
+            "required": true
+          },
+          {
+            "name": "password",
+            "in": "path",
+            "description": "insira uma password",
+            "schema":{
+              "type": "string",
+              "format": "password"
+            },
+            "required": true
+          }
+        ],
+        "responses": {},
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+
+    "/user/login/{username}/{password}": {
+      "post": {
+        "tags": ["Utilizadores"],
+        "description": "Login",
+        "operationId": "Login",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "insira o seu nome de utilizador",
+            "required": true
+          },
+          {
+            "name": "password",
+            "in": "path",
+            "description": "insira a sua password",
+            "schema":{
+              "type": "string",
+              "format": "password"
+            },
+            "required": true
+          }
+        ],
+        "responses": {}
+      }
+    },
     "/Administracao/PopularMatriculas/{n}": {
       "post": {
         "tags": ["Administracao"],
@@ -25,7 +83,12 @@
             "default": "10000"
           }
         ],
-        "responses": {}
+        "responses": {},
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       }
     },
     "/Administracao/DelMatriculas": {
@@ -33,7 +96,12 @@
         "tags": ["Administracao"],
         "description": "Apagar todas as matriculas",
         "operationId": "Apagar todas Matriculas na Base de Dados",
-        "responses": {}
+        "responses": {},
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       }
     },
     "/Administracao/PopularEstacionamentos": {
@@ -41,7 +109,12 @@
         "tags": ["Administracao"],
         "description": "Vai popular o estacionamento com 2 anos",
         "operationId": "Inserir estacionamentos na Base de Dados",
-        "responses": {}
+        "responses": {},
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       }
     },
     "/Administracao/DelEstacionamentos": {
@@ -49,7 +122,12 @@
         "tags": ["Administracao"],
         "description": "Apagar todos os estacionamentos",
         "operationId": "Apagar todos os estacionamentos na Base de Dados",
-        "responses": {}
+        "responses": {},
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       }
     },
     "/Administracao/ResetParque/{n}": {
@@ -66,7 +144,12 @@
             "default": "150"
           }
         ],
-        "responses": {}
+        "responses": {},
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       }
     },
 
@@ -96,7 +179,12 @@
             "required": true
           }
         ],
-        "responses": {}
+        "responses": {},
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       }
     },
     "/Parque/RegistaSaida": {
@@ -104,7 +192,12 @@
         "tags": ["Parque"],
         "description": "Regista Saida de um carro",
         "operationId": "Regista Saida de um carro",
-        "responses": {}
+        "responses": {},
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       }
     },
     "/Parque/MediaCarros/{periodo}": {
@@ -128,7 +221,12 @@
             }
           }
         ],
-        "responses": {}
+        "responses": {},
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       }
     },
     "/Parque/QtdCarrosNumaData/{data}": {
@@ -144,7 +242,12 @@
             "required": true
           }
         ],
-        "responses": {}
+        "responses": {},
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       }
     },
     "/Parque/QtdCarrosNRegistadosNumaData/{data}": {
@@ -160,7 +263,12 @@
             "required": true
           }
         ],
-        "responses": {}
+        "responses": {},
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       }
     },
     "/Parque/DiaComMaisCarros": {
@@ -168,7 +276,12 @@
         "tags": ["Parque"],
         "description": "Dia do Parque em que houve mais entradas",
         "operationId": "Dia com mais carros",
-        "responses": {}
+        "responses": {},
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       }
     },
     "/Parque/DiaComMenosCarros": {
@@ -176,7 +289,12 @@
         "tags": ["Parque"],
         "description": "Dia do Parque em que houve menos entradas",
         "operationId": "Dia com menos carros",
-        "responses": {}
+        "responses": {},
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       }
     },
     "/Parque/EntradasCarroNumaData/{matricula}/{data}": {
@@ -198,7 +316,12 @@
             "required": true
           }
         ],
-        "responses": {}
+        "responses": {},
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       }
     },
     "/Parque/CarrosEntreDatas/{DataInicio}/{DataFim}": {
@@ -220,7 +343,12 @@
             "required": true
           }
         ],
-        "responses": {}
+        "responses": {},
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       }
     },
     "/Parque/DiasLotado": {
@@ -228,29 +356,25 @@
         "tags": ["Parque"],
         "description": "Dias em que o estacionamento ficou lotado",
         "operationId": "Dias em que o estacionamento ficou lotado", 
-        "responses": {}
+        "responses": {},
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
       }
     }
   },
   "components": {
       "securitySchemes": {
-        "petstore_auth": {
-          "type": "oauth2",
-          "flows": {
-            "implicit": {
-              "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
-              "scopes": {
-                "write:pets": "modify pets in your account",
-                "read:pets": "read your pets"
-              }
-            }
-          }
-        },
         "api_key": {
           "type": "apiKey",
           "name": "api_key",
           "in": "header"
         }
-      }
     }
+  },
+  "security": {
+    "api_key": []
+  }
 }
