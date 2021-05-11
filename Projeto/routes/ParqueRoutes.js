@@ -1,40 +1,78 @@
 const express = require("express");
 const router = express.Router();
 
+//JWT (para gerar e verificar tokens)
+const jwt = require('jsonwebtoken');
+//importar o secret para o JWT do ficheiro Secret.json
+const Secret= require('../Secret.json');
+const SECRET_UTILIZADORES=Secret.SECRET_UTILIZADORES;
+const SECRET_ADMINISTRADOR=Secret.SECRET_ADMINISTRADOR;
+
 //invocar o controller
 const parque_controller = require('../controllers/ParqueController');
 
-//route Lugares Vagos
-router.route("/LugaresVagos").get(parque_controller.LugaresVagos);
+//verifica previlégios administrados
+function verificaJWTAdmin(req, res, next){
+    const token = req.headers['api_key'];
+    jwt.verify(token, SECRET_ADMINISTRADOR, (err) => {
+        
+        if(err){
+            return res.status(401).send('Unautorized access!');
+        }
+        next();
+    })
+}
+//verifica previlégios todos os users registados
+function verificaJWTTodos(req, res, next){
+    let token = req.headers['api_key'];
+    jwt.verify(token, SECRET_ADMINISTRADOR, (err) => {
+        
+        if(err){
+            jwt.verify(token, SECRET_UTILIZADORES, (err) => {
+        
+                if(err){
+                    return res.status(401).send('Unautorized access!');
+                }
+                next();
+            })
+            //return res.status(401).send('Unautorized access!');
+        }else{
+            next();
+        }
+    })
+}
 
-//route Registo de entrada de um carro
-router.route("/RegistaEntrada/:matricula").put(parque_controller.RegistaEntrada);
+//route Lugares Vagos todos os utilizadores
+router.route("/LugaresVagos").get(verificaJWTTodos, parque_controller.LugaresVagos);
 
-//route Registo de saida de um carro
-router.route("/RegistaSaida").put(parque_controller.RegistaSaida);
+//route Registo de entrada de um carro admin
+router.route("/RegistaEntrada/:matricula").put(verificaJWTAdmin, parque_controller.RegistaEntrada);
 
-//route media
-router.route("/MediaCarros/:periodo").get(parque_controller.MediaCarros);
+//route Registo de saida de um carro admin
+router.route("/RegistaSaida").put(verificaJWTAdmin, parque_controller.RegistaSaida);
 
-//route quantos carros entraram num certo dia
-router.route("/QtdCarrosNumaData/:data").get(parque_controller.QtdDia);
+//route media admin
+router.route("/MediaCarros/:periodo").get(verificaJWTAdmin, parque_controller.MediaCarros);
 
-//route quantos carros nao registados entraram num certo dia 
-router.route("/QtdCarrosNRegistadosNumaData/:data").get(parque_controller.QtdNRegistados);
+//route quantos carros entraram num certo dia admin
+router.route("/QtdCarrosNumaData/:data").get(verificaJWTAdmin, parque_controller.QtdDia);
 
-//route MaisCarros
-router.route("/DiaComMaisCarros").get(parque_controller.MaiorDia);
+//route quantos carros nao registados entraram num certo dia admin
+router.route("/QtdCarrosNRegistadosNumaData/:data").get(verificaJWTAdmin, parque_controller.QtdNRegistados);
 
-//route MenosCarros
-router.route("/DiaComMenosCarros").get(parque_controller.MenorDia);
+//route MaisCarros admin
+router.route("/DiaComMaisCarros").get(verificaJWTAdmin, parque_controller.MaiorDia);
 
-//route entradas do Carro num dia
-router.route("/EntradasCarroNumaData/:matricula/:data").get(parque_controller.QtdDiaCarro);
+//route MenosCarros admin
+router.route("/DiaComMenosCarros").get(verificaJWTAdmin, parque_controller.MenorDia);
 
-//route numero de carros num periudo
-router.route("/CarrosEntreDatas/:DataInicio/:DataFim").get(parque_controller.QtdPeriodo);
+//route entradas do Carro num dia admin
+router.route("/EntradasCarroNumaData/:matricula/:data").get(verificaJWTAdmin, parque_controller.QtdDiaCarro);
 
-//route Registo de saida de um carro
-router.route("/DiasLotado").get(parque_controller.DiasLotado);
+//route numero de carros num periudo admin
+router.route("/CarrosEntreDatas/:DataInicio/:DataFim").get(verificaJWTAdmin, parque_controller.QtdPeriodo);
+
+//route Registo de saida de um carro admin
+router.route("/DiasLotado").get(verificaJWTAdmin, parque_controller.DiasLotado);
 
 module.exports = router;
