@@ -20,7 +20,28 @@ exports.RegistaEntrada = async function(req, res){
     let segundos = dataTime.getSeconds();*/
     
     //formatar a data e hora para string
-    let dia = dataTime.getDate() + '/' + (dataTime.getMonth()+1) + '/' + dataTime.getFullYear();
+    let dia =dataTime.getDate()
+    let mes =(dataTime.getMonth()+1)
+    let ano =dataTime.getFullYear()
+
+    let data = dia + '/' + mes + '/' + ano;
+    
+    let aux_dia=''
+    let aux_mes=''
+
+    if(dia<10){
+        aux_dia='/0'+dia
+    }else{
+        aux_dia='/'+dia
+    }
+
+    if(dia<10){
+        aux_mes='/0'+mes
+    }else{
+        aux_mes='/'+mes
+    }
+
+    let datainv = ano + aux_mes + aux_dia
     let horas = dataTime.getHours() + ':' + dataTime.getMinutes()
 
     //colocar a matricula em maiusculas para prevenir desleixo do utilizador
@@ -57,8 +78,8 @@ exports.RegistaEntrada = async function(req, res){
                     let registo = new RegistoEntradasModel({
                         _id: correnteID,
                         matricula: matriculaInserir,
-                        dataEntrada: dia,
-                        dataEntradaInv: dataTime.getFullYear() + '/' + (dataTime.getMonth()+1) + '/' + dataTime.getDate(),
+                        dataEntrada: data,
+                        dataEntradaInv: datainv,
                         horaEntrada: horas,
                         registada: Mregistada,
                         lotacao: auxlugar,
@@ -82,7 +103,7 @@ exports.RegistaEntrada = async function(req, res){
                         })
                     })
 
-                    res.send('Entrada no dia ' + dia + ' e as ' + horas + ' horas registada com sucesso!')
+                    res.send('Entrada no dia ' + data + ' e as ' + horas + ' horas registada com sucesso!')
                 })
             })
         })
@@ -245,13 +266,43 @@ exports.QtdPeriodo = function(req, res){
 
     var datePartinicio = dataInicio.split("/");
 
-    // month is 0-based, that's why we need dataParts[1] - 1
-    var dataInicial = datePartinicio[2] + '/' + datePartinicio[1] + '/' + datePartinicio[0];
+    let aux_dia_inicio=''
+    let aux_mes_inicio=''
+
+    if(datePartinicio[0].length==1){
+        aux_dia_inicio='/0'+datePartinicio[0]
+    }else{
+        aux_dia_inicio='/'+datePartinicio[0]
+    }
+
+    if(datePartinicio[1].length==1){
+        aux_mes_inicio='/0'+datePartinicio[1]
+    }else{
+        aux_mes_inicio='/'+datePartinicio[1]
+    }
+
+    //var dataInicial = datePartinicio[2] + '/' + datePartinicio[1] + '/' + datePartinicio[0];
+    var dataInicial = datePartinicio[2] + aux_mes_inicio + aux_dia_inicio;
 
     var datePartsfim = dataFim.split("/");
 
-    // month is 0-based, that's why we need dataParts[1] - 1
-    var dataFinal = datePartsfim[2] + '/' + datePartsfim[1] + '/' + datePartsfim[0];
+    let aux_dia_fim=''
+    let aux_mes_fim=''
+
+    if(datePartsfim[0].length==1){
+        aux_dia_fim='/0'+datePartsfim[0]
+    }else{
+        aux_dia_fim='/'+datePartsfim[0]
+    }
+
+    if(datePartsfim[1].length==1){
+        aux_mes_fim='/0'+datePartsfim[1]
+    }else{
+        aux_mes_fim='/'+datePartsfim[1]
+    }
+
+    //var dataFinal = datePartsfim[2] + '/' + datePartsfim[1] + '/' + datePartsfim[0];
+    var dataFinal = datePartsfim[2] + aux_mes_fim + aux_dia_fim;
 
     RegistoEntradasModel.countDocuments({$and:[{dataEntradaInv:{$gte: dataInicial}},{dataEntradaInv:{$lte: dataFinal}}]}, function(err, nCarros){
         res.json({
@@ -260,8 +311,44 @@ exports.QtdPeriodo = function(req, res){
     })
 }
 
-exports.DiasLotado = function(req, res){
-	RegistoEntradasModel.find({lotacao: {$lte:'0'}},function(err,registos){
-		res.send(registos);
+exports.DiasLotado2 = function(req, res){
+	RegistoEntradasModel.count({lotacao: {$lte:'0'}},function(err,registos){
+        console.log(registos)
+		res.json(registos);
 	})
+}
+
+exports.DiasLotado = function(req, res){
+    /*RegistoEntradasModel.aggregate([
+        {$group: {"_id":"$dataEntradaInv",count: { $sum: 1 }}}
+    ],function(err,registos){
+        let ListaRegisto=[]
+        console.log(registos)
+        let quantidade = registos.length
+        console.log(quantidade)
+        for(i=0; i<quantidade; i++){
+            ListaRegisto.push(registos[i]._id)
+        }
+        //console.log(registos)
+        res.send(ListaRegisto);
+    })*/
+    RegistoEntradasModel.aggregate([
+        {$match: {lotacao: {$lte: 0}}},
+        {$group: {"_id":"$dataEntradaInv",count: { $sum: 1 }}}
+    ]).sort('_id').exec(function(err,registos){
+        let ListaRegisto=[]
+        let quantidade = registos.length
+        
+        for(i=0; i<quantidade; i++){
+            let dataInicio = registos[i]._id;
+
+            var datePartinicio = dataInicio.split("/");
+
+            var data = datePartinicio[2] + '/' + datePartinicio[1] + '/' + datePartinicio[0];
+
+            //ListaRegisto.push(registos[i]._id)
+            ListaRegisto.push(data)
+        }
+        res.send(ListaRegisto);
+    })
 }
