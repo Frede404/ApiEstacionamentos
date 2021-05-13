@@ -11,7 +11,33 @@
     "http"
   ],
   "paths": {
-    "/user/newUser/{username}/{password}": {
+    "/Utilizador/login/{username}/{password}": {
+      "post": {
+        "tags": ["Utilizadores"],
+        "description": "Login",
+        "operationId": "Login",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "insira o seu nome de utilizador",
+            "required": true
+          },
+          {
+            "name": "password",
+            "in": "path",
+            "description": "insira a sua password",
+            "schema":{
+              "type": "string",
+              "format": "password"
+            },
+            "required": true
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/Utilizador/NovoUtilizador/{username}/{password}": {
       "post": {
         "tags": ["Utilizadores"],
         "description": "Criar novo user",
@@ -40,33 +66,6 @@
             "api_key": []
           }
         ]
-      }
-    },
-
-    "/user/login/{username}/{password}": {
-      "post": {
-        "tags": ["Utilizadores"],
-        "description": "Login",
-        "operationId": "Login",
-        "parameters": [
-          {
-            "name": "username",
-            "in": "path",
-            "description": "insira o seu nome de utilizador",
-            "required": true
-          },
-          {
-            "name": "password",
-            "in": "path",
-            "description": "insira a sua password",
-            "schema":{
-              "type": "string",
-              "format": "password"
-            },
-            "required": true
-          }
-        ],
-        "responses": {}
       }
     },
     "/Administracao/PopularMatriculas/{n}": {
@@ -122,6 +121,27 @@
         "tags": ["Administracao"],
         "description": "Apagar todos os estacionamentos",
         "operationId": "Apagar todos os estacionamentos na Base de Dados",
+        "responses": {},
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/Administracao/RegistaMatricula/{matricula}": {
+      "post": {
+        "tags": ["Administracao"],
+        "description": "Registo da matricula de um carro",
+        "operationId": "Regist da matricula de um carro",
+        "parameters": [
+          {
+            "name": "matricula",
+            "in": "path",
+            "description": "Registo da matricula de um carro",
+            "required": true
+          }
+        ],
         "responses": {},
         "security": [
           {

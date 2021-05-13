@@ -22,7 +22,7 @@ function verificaJWTAdmin(req, res, next){
 }
 
 //criar um novo user
-router.route("/newUser/:username/:password").post(verificaJWTAdmin, user_controller.newUser);
+router.route("/NovoUtilizador/:username/:password").post(verificaJWTAdmin, user_controller.newUser);
 
 //login
 router.route("/login/:username/:password").post(user_controller.login);

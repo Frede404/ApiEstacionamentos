@@ -40,7 +40,7 @@ app.use(
 
 app.use("/Administracao", MatriculasRoutes);
 app.use("/Parque", ParqueRoutes);
-app.use("/User", UserRoutes);
+app.use("/Utilizador", UserRoutes);
 
 app.use(express.json());
 

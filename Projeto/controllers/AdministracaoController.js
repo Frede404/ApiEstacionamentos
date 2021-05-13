@@ -195,6 +195,27 @@ exports.DelEstacionamentos = function(req, res){
     })
 }
 
+exports.AddMatricula = async function(req, res){
+	
+    let matriculaInserir = req.params.matricula.toUpperCase();
+    MatriculaModel.findOne().sort('-_id').exec(function(err,ultimoID){
+        //formata a matricula para ser inserida
+        let registo = new  MatriculaModel({
+            _id: (parseInt('' + ultimoID.id, 10)+1),
+            nMatricula: matriculaInserir,
+        });
+        
+        registo.save(function(err){
+                
+            if(err){
+                throw err;
+            }
+        })
+        
+        res.send('Matricula Registada com sucesso!')
+    })
+}
+
 exports.ResetParque = async function(req, res){
     let quantidade = req.params.n
 

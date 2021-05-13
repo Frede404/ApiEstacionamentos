@@ -33,6 +33,9 @@ router.route("/PopularEstacionamentos").post(verificaJWTAdmin, administracao_con
 
 //route Apaga estacionamentos
 router.route("/DelEstacionamentos").delete(verificaJWTAdmin, administracao_controller.DelEstacionamentos);
+
+//route popular matriculas
+router.route("/RegistaMatricula/:matricula").post(verificaJWTAdmin, administracao_controller.AddMatricula);
  
 //route Reset ao parque
 router.route("/ResetParque/:n").put(verificaJWTAdmin, administracao_controller.ResetParque);
